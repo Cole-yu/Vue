@@ -2,6 +2,8 @@
 
 > A Vue.js project
 
+## 使用 vue-cli 直接生成的 Vue 项目，不是自己用webpack搭建起来的开发环境，当初只是为了学 vue基础（可删除）
+
 ## Build Setup
 
 ``` bash

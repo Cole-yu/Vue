@@ -40,7 +40,7 @@ module.exports = {
   },
   module: {
     rules: [
-      ...(config.dev.useEslint ? [createLintingRule()] : []),
+      // ...(config.dev.useEslint ? [createLintingRule()] : []),   //eslint的规则
       {
         test: /\.vue$/,
         loader: 'vue-loader',
