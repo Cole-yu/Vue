@@ -85,4 +85,6 @@
 		compile:compile,
 		compileToFunctions:createCompileToFunctions(compile)
 	}
+
+	var ref = compileToFunctions(template,{},this)
 ```

@@ -9,10 +9,19 @@
 <body>
 	<div id="app"></div>
 	<script type="text/javascript">
-		var app=new Vue({
+		var vm = new Vue({
 			el:"#app",
-			template:"<h1>hello world!</h1>"
+			// template:"<h1>hello world!</h1>",
+			render(createElement){
+				return createElement("h1","title");
+			}
 		});
+		console.log(vm.$options.render);
+		// 输出
+		// ƒ anonymous(
+		// ) {
+		// with(this){return _c('h1',[_v("hello world!")])}	// this执行Vue的实例对象
+		// }
 	</script>
 </body>
 </html>
