@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>自己实现一个Vue编译器</title>
+	<meta charset="utf-8">
+	<meta name="keywords" content="Vue编译器">
+</head>
+<body>
+	<script type="text/javascript" src="compileToFunctions.js"></script>
+	<script type="text/javascript">
+				// 渲染函数
+		var ref = compileToFunctions("<div>{{test}}</div>",{
+	  	   //  shouldDecodeNewlines: shouldDecodeNewlines,
+	       //  shouldDecodeNewlinesForHref: shouldDecodeNewlinesForHref,
+	       //  delimiters: options.delimiters,		// 修改插值表达式，可以将{{}}改为{}
+	       //  comments: options.comments			// 编译时是否保存HTML注释,默认false
+		},this);
+	</script>
+</body>
+</html>

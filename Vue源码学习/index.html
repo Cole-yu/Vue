@@ -11,10 +11,10 @@
 	<script type="text/javascript">
 		var vm = new Vue({
 			el:"#app",
-			// template:"<h1>hello world!</h1>",
-			render(createElement){
-				return createElement("h1","title");
-			}
+			template:"<h1>hello world!</h1>",
+			// render(createElement){
+			// 	return createElement("h1","title");
+			// }
 		});
 		console.log(vm.$options.render);
 		// 输出
