@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>自己实现一个Vue编译器</title>
+	<title>Vue 编译器原理</title>
 	<meta charset="utf-8">
-	<meta name="keywords" content="Vue编译器">
+	<meta name="keywords" content="Vue 编译器">
 </head>
 <body>
 	<script type="text/javascript" src="compileToFunctions.js"></script>
@@ -15,6 +15,29 @@
 	       //  delimiters: options.delimiters,		// 修改插值表达式，可以将{{}}改为{}
 	       //  comments: options.comments			// 编译时是否保存HTML注释,默认false
 		},this);
+
+		// parse 语法分析过程
+		// html = '<div>{{test}}</div>'
+		while(html){					// 死循环 循环停止 "<"  === > <
+
+		}
+
+		// `<div>{{test}}</div>`
+
+		// <div 提取处理  下标值  3 = n  {tag:"div", attr:[id:"xxx", xxx:"xxxx"]}
+		function advance(n){
+			index += n;					// n = 3
+			html = html.substring(n);	// 剔除
+		}
+		// 剩下 {{test}}</div>
+
+		// 直到 html 被截取为 空，形成一个对象，该对象 {tag:"div", attr:[id:"xxx", xxx:"xxxx"]} 是 AST 的雏形
+
+		// 再进行句法分析，类似的处理过程 和 正则匹配 提取字符串，生成一个 Json 对象
+
+		// 然后根据储存模板信息的对象 生成 AST 抽象语法树
+
+		// 最后调用 generate 方法 生成目标平台所需要的代码
 	</script>
 </body>
 </html>
