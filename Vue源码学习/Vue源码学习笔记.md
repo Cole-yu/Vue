@@ -3,6 +3,7 @@
 	百度关键字 VUE源码分析
 	http://hcysun.me/2017/03/03/Vue%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/
 	https://blog.csdn.net/Bonjourjw/article/details/80344368
+	http://blog.cgsdream.org/2016/11/05/vue-source-analysis-1/
 
 ### 从渲染函数解析模板入手
 ```

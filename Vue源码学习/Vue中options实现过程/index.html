@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>提升编码水平</title>
+	<meta charset="utf-8">
+	<meta name="keywords" content="提升编码水平">
+	<script type="text/javascript" src="myVue.1.0.1.js"></script>
+</head>
+<body>
+	<div id = "app">
+		{{ message }}
+	</div>
+	<script type="text/javascript">
+		debugger;
+		var vm = new Vue({
+			el : "#app",
+			// template:"<div>{{message}}</div>",
+			data:{
+				message : "hello Vue",
+				list : []
+			}
+		});
+
+		// console.log(vm.message);
+	</script>
+</body>
+</html>
