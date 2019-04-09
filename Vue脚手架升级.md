@@ -8,7 +8,7 @@
 
 2. 安装新的包
 ```
-	npm install vue/cli -g
+	npm install @vue/cli -g
 ```
 
 ### 快速原型开发
