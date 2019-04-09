@@ -4,14 +4,16 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div> -->
-    
-    <div id="nav">
-      <Navi/>
-    </div>
 
-    <div class="main">
-      <router-view/>
-    </div>
+    <el-container>
+      <el-aside id="nav">
+        <Navi/>
+      </el-aside>
+      <el-main id="main">
+        <router-view/>
+      </el-main>
+    </el-container>
+
   </div>
 </template>
 
@@ -50,7 +52,7 @@ export default {
 }
 #nav {
   padding-top:30px;
-  width: 200px;
+  width: 200px!important;
   height: 100%;
   position: absolute;
   left:0;
@@ -58,11 +60,14 @@ export default {
   background-color: #545c64;
   box-sizing: border-box;
 }
-.main{
+#main{
   width: 100%;
   height: 100%;
-  padding-left:200px;
+  padding-left:200px!important;
   background-color: #ddd;
   box-sizing: border-box;
+}
+#main.el-main{
+  padding:0;  
 }
 </style>

@@ -1,24 +1,33 @@
 <template>
-  <div class="home">    
-    <header id="header">
-      <el-row>
-        <el-col :span="5" :offset="1">
-          <h1 style="color:white;font-size:28px;">{{slogan}}</h1>
-        </el-col>
-        <el-col :span="5" :offset="9">
-          <el-input v-model="input" placeholder="请输入内容"></el-input>
-        </el-col>
-        <el-col :span="1" :offset="1">
-          <div id="logout" ></div>          
-        </el-col>
-        <el-col :span='1'>
-          <div id="account">{{userName}}</div>
-        </el-col>
-      </el-row>      
-    </header>
-    <div id="container">
-      <AppList/>
-    </div>
+  <div class="home">
+    <el-container>   
+      <el-header id="header">
+        <el-row>
+          <el-col :span="5" :offset="1">
+            <h1 style="color:white;font-size:28px;">{{slogan}}</h1>
+          </el-col>
+          <el-col :span="5" :offset="9">
+            <el-input v-model="input" placeholder="请输入内容"></el-input>
+          </el-col>
+          <el-col :span="1" :offset="1">
+            <div id="logout" ></div>          
+          </el-col>
+          <el-col :span='1'>
+            <div id="account">{{userName}}</div>
+          </el-col>
+        </el-row>      
+      </el-header>    
+      <el-main id="container">
+        <AppList/>
+      </el-main>
+      <el-footer>
+        <el-pagination
+          background
+          layout="prev, pager, next"
+          :total="100">
+        </el-pagination>
+      </el-footer>
+    </el-container>
   </div>
 </template>
 
