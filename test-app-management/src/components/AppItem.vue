@@ -44,8 +44,8 @@ export default {
         display: inline-block;
         width: 250px;
         border-radius: 5px;
-        padding:15px;
-        margin: 15px;
+        padding:20px;
+        margin: 10px;
         border:1px solid #ddd;
         background-color: white;        
     }

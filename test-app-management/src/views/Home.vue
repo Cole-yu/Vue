@@ -7,7 +7,7 @@
             <h1 style="color:white;font-size:28px;">{{slogan}}</h1>
           </el-col>
           <el-col :span="5" :offset="9">
-            <el-input v-model="input" placeholder="请输入内容"></el-input>
+            <el-input v-model="input" placeholder="请输入内容" @change='changeFilterParams'></el-input>
           </el-col>
           <el-col :span="1" :offset="1">
             <div id="logout" ></div>          
@@ -18,13 +18,22 @@
         </el-row>      
       </el-header>    
       <el-main id="container">
-        <AppList/>
+        <AppList 
+          :filterParams='filterParams'
+          :currentPage='currentPage'
+          :perPageNumber='perPageNumber'
+          @changePaginationLength='changePaginationLength' />
       </el-main>
       <el-footer>
         <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="currentPage"
+          :page-sizes="[4, 8, 12]"          
+          :page-size="perPageNumber"
           background
-          layout="prev, pager, next"
-          :total="100">
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="totalLength">
         </el-pagination>
       </el-footer>
     </el-container>
@@ -39,13 +48,38 @@ export default {
   name: 'home',
   data(){
     return {
-      input:'',
-      userName:'',      
-      slogan:'测试脚本管理平台'
+      input : '',
+      userName : '',
+      filterParams : '',
+      currentPage : 1,
+      perPageNumber : 8, 
+      totalLength : 0,
+      slogan : '测试脚本管理平台'
     }
   },
   components: {
     AppList
+  },
+  methods:{
+    changeFilterParams(){
+      this.filterParams = this.input;
+    },
+    changePaginationLength(paginationLength){
+      this.totalLength = paginationLength;
+    },
+    handleSizeChange(val) {
+      this.perPageNumber = val;
+      console.log(`每页 ${val} 条`);
+    },
+    handleCurrentChange(val) {
+      this.currentPage = val;
+      console.log(`显示当前所在页面:当前为第${val}页`);
+    }
+  },
+  watch:{
+    input(){
+      this.filterParams = this.input;
+    }
   },
   mounted(){
     // 用户信息
@@ -70,8 +104,5 @@ export default {
     line-height: 40px;
     color:white;
     font-size: 20px;
-  }
-  #container{
-    padding: 30px;
   }  
 </style>
