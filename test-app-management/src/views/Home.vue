@@ -52,7 +52,7 @@ export default {
       userName : '',
       filterParams : '',
       currentPage : 1,
-      perPageNumber : 8, 
+      perPageNumber : 12, 
       totalLength : 0,
       slogan : '测试脚本管理平台'
     }

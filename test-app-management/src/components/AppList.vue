@@ -79,10 +79,10 @@ export default {
   },
   methods:{
     init(){
-      var baseUrl = GlobalOption.baseUrl;            
-      var url = baseUrl + "/appList";
+      var baseUrl = GlobalOption.baseUrl;                  
 
-      axios.get(url)
+      var getUrl = baseUrl;
+      axios.get(getUrl)
         .then( res => {
           // res对象 = {
           //   data:'',
@@ -97,7 +97,13 @@ export default {
         .catch(err => {
           console.log(err)
         })
-    }    
+
+      // POST 请求
+      var appType = '类型B';
+      var postUrl = baseUrl + "/appList/" + appType;
+      axios.post(postUrl)
+        .then(res => console.log(res));
+    }   
   },
   mounted(){
     this.init();
