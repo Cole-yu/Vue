@@ -1,17 +1,24 @@
-<template>    
-  	<div class="item_bock head_p">
-		<div class="head_img">
-			<img :src="userInfo.avatar"/>
+<template>   
+	<div>
+		<div class="item_bock head_p">
+			<div class="head_img">
+				<img :src="userInfo.avatar"/>
+			</div>
+			<div class="setting_right" @click.stop="uploadHeadImg">
+				<div class="caption">更改头像</div>
+			</div>
+			<input type="file" accept="image/*" @change="handleFile" class="hiddenInput"/>
+		</div> 
+		<div>
+			<Table></Table>
 		</div>
-		<div class="setting_right" @click.stop="uploadHeadImg">
-			<div class="caption">更改头像</div>
-		</div>
-		<input type="file" accept="image/*" @change="handleFile" class="hiddenInput"/>
-  	</div> 
+	</div>	
 </template>
 
 <script>
-import avatar from '@/assets/images/avatar.jpg'
+import avatar from '@/assets/images/avatar.jpg';
+import Table from '@/components/table'
+
 export default {
   data(){
     return {
@@ -20,6 +27,9 @@ export default {
         	// 初始图片
       	}
     }    
+  },
+  components:{
+	  Table
   },
   methods: {
     // 打开图片上传
