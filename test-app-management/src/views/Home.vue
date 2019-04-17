@@ -10,7 +10,7 @@
             <el-input v-model="input" placeholder="请输入内容" @change='changeFilterParams'></el-input>
           </el-col>
           <el-col :span="1" :offset="1">
-            <div id="logout" ></div>          
+            <div id="logout"></div>
           </el-col>
           <el-col :span='1'>
             <div id="account">{{userName}}</div>

@@ -9,13 +9,18 @@
 			</div>
 			<input type="file" accept="image/*" @change="handleFile" class="hiddenInput"/>
 		</div> 
+		<br/>
+		<hr/>
+		<br/>	
 		<div>
-			<Table></Table>
-		</div>
+			<!-- <Table/> -->
+			<Form/>
+		</div>		
 	</div>	
 </template>
 
 <script>
+import Form from '@/components/Form'
 import avatar from '@/assets/images/avatar.jpg';
 import Table from '@/components/table'
 
@@ -29,7 +34,8 @@ export default {
     }    
   },
   components:{
-	  Table
+	  Table,
+	  Form
   },
   methods: {
     // 打开图片上传
