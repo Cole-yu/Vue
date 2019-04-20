@@ -16,14 +16,6 @@ export default new Router({
       name: 'about',      
 	//   component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
 	  component: resolve => require(['./views/About.vue'], resolve)
-	
-	//   Vue.component('async-webpack-example', function (resolve, reject) {
-	// 	// 这个特殊的 `require` 语法将会告诉 webpack
-	// 	// 自动将你的构建代码切割成多个包，这些包
-	// 	// 会通过 Ajax 请求加载
-	// 	require(['./my-async-component'], resolve)
-	//   })
-
     },
     {
       path: '/avatar',

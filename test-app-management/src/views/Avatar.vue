@@ -1,4 +1,4 @@
-<template>   
+<template>
 	<div>
 		<div class="item_bock head_p">
 			<div class="head_img">
@@ -14,7 +14,20 @@
 		<br/>	
 		<div>
 			<!-- <Table/> -->
-			<Form/>
+			<!-- <Form/> -->
+			<el-upload
+				class="upload-demo"
+				ref="upload"
+				action="http://localhost:3000/upload"
+				:headers="headers"
+				:on-preview="handlePreview"
+				:on-remove="handleRemove"
+				:file-list="fileList"
+				:auto-upload="false">
+				<el-button slot="trigger" size="small" type="primary">选取文件</el-button>
+				<el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
+				<div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+			</el-upload>
 		</div>		
 	</div>	
 </template>
@@ -30,7 +43,11 @@ export default {
       	userInfo: {
         	avatar: avatar
         	// 初始图片
-      	}
+		},
+		fileList: [],
+		headers:{
+			"Content-Type":"multipart/form-data"
+		}
     }    
   },
   components:{
@@ -52,7 +69,16 @@ export default {
         	this.userInfo.avatar = res.result
       	}
       	reader.readAsDataURL(file)
-    },
+	},
+	submitUpload() {
+		this.$refs.upload.submit();
+	},
+	handleRemove(file, fileList) {
+		console.log(file, fileList);
+	},
+	handlePreview(file) {
+		console.log(file);
+	}
   }
 }
 </script>

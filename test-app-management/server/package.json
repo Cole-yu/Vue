@@ -1,0 +1,21 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "express as server",
+  "main": "app.js",
+  "scripts": {
+    "dev": "node app.js",
+    "start": "npm run dev"
+  },
+  "keywords": [
+    "Express",
+    "Server"
+  ],
+  "author": "1032577646@qq.com",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mockjs": "^1.0.1-beta3",
+    "connect-multiparty": "^2.0.0"
+  }
+}
