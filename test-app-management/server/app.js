@@ -4,6 +4,7 @@ var Mock = require('mockjs');
 //form表单需要的中间件。
 var mutipart= require('connect-multiparty');
 
+// 处理文件上传的中间件
 var mutipartMiddeware = mutipart();
 
 app.use(

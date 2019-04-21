@@ -26,6 +26,11 @@ export default new Router({
 		path: '/form',
 		name: 'form',      
 		component: () => import(/* webpackChunkName: "form" */ './views/Form.vue')
+	},
+	{
+		path: '/upload',
+		name: 'upload',      
+		component: () => import(/* webpackChunkName: "form" */ './views/NativeUpload.vue')
 	}	
   ]
 })
