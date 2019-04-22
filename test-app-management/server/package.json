@@ -14,8 +14,9 @@
   "author": "1032577646@qq.com",
   "license": "ISC",
   "dependencies": {
+    "connect-multiparty": "^2.0.0",
     "express": "^4.16.4",
     "mockjs": "^1.0.1-beta3",
-    "connect-multiparty": "^2.0.0"
+    "path": "^0.12.7"
   }
 }
