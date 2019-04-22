@@ -7,7 +7,7 @@
 <script>
 import AppItem from '@/components/AppItem'
 import Mock from 'mockjs'
-import GlobalOption from '../globalOption.json'
+import GlobalOption from '../configs/global.conf'
 import axios from 'axios';
 import _ from 'lodash';
 
@@ -79,7 +79,7 @@ export default {
   },
   methods:{
     init(){
-      var baseUrl = GlobalOption.baseUrl;                  
+      var baseUrl = GlobalOption.url;                  
 
       var getUrl = baseUrl;
       axios.get(getUrl)

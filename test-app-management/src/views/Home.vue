@@ -42,7 +42,7 @@
 
 <script>
 import AppList from '@/components/AppList.vue'
-import GlobalOption from "../globalOption.json"
+import GlobalOption from "../configs/global.conf"
 
 export default {
   name: 'home',

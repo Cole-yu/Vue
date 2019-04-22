@@ -114,14 +114,28 @@ export default {
 					
 					console.log(formData);		// 显示{}，需要使用formDate.get("key")来获取某个字段
 
-					axios({
-						url: "/upload",
-						method: "POST",						
-						headers: {
+					// axios({
+					// 	url: "/upload",
+					// 	method: "POST",						
+					// 	headers: {
+					// 		'Content-Type': 'multipart/form-data;'
+					// 	},
+					// 	data:formData				// 只能是单一的FormData对象
+					// })
+
+					var config = {
+						headers:{
 							'Content-Type': 'multipart/form-data;'
-						},
-						data:formData				// 只能是单一的FormData对象
-					})
+						}
+					}
+					axios.post('/file/upload', formData, config)
+						.then(res => {
+							console.log(res.data);
+						})
+						.catch( err => {
+							console.log(err);
+						})
+
 
 				} else {
 					console.log('error submit!!');

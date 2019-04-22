@@ -3,15 +3,18 @@ var app = new express();
 var Mock = require('mockjs');
 //form表单需要的中间件。
 var mutipart= require('connect-multiparty');
+var uploadRouter = require('./routes/upload');
 
 // 处理文件上传的中间件
 var mutipartMiddeware = mutipart();
 
-app.use(
-    mutipart({
-        uploadDir:'./uploadFiles'
-    })
-);
+// app.use(
+//     mutipart({
+//         uploadDir:'./uploadFiles'
+//     })
+// );
+
+app.use('/file', uploadRouter);
 
 function createMockDate(){
 	// 将时间戳格式改为 'yyyy-MM-dd' 格式
@@ -73,16 +76,16 @@ app.post('/appList/:appType', (req,res) => {
 
 
 //这里就是接受form表单请求的接口路径，请求方式为post。
-app.post('/upload', mutipartMiddeware, function (req, res) {    
-    console.log(JSON.stringify(req.files, null ,4));
+// app.post('/upload', mutipartMiddeware, function (req, res) {    
+//     console.log(JSON.stringify(req.files, null ,4));
   
-    res.set("Access-Control-Allow-Origin", "*");
-    res.set("Access-Control-Allow-Headers", "X-Requested-With,Content-Type");
-    res.set("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
+//     res.set("Access-Control-Allow-Origin", "*");
+//     res.set("Access-Control-Allow-Headers", "X-Requested-With,Content-Type");
+//     res.set("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
     
-    //给浏览器返回一个成功提示。
-    res.send('upload success!');
-});
+//     //给浏览器返回一个成功提示。
+//     res.send('upload success!');
+// });
 
 app.listen(3000);
 console.log("listen at port 3000");

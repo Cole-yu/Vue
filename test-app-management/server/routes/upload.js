@@ -3,13 +3,13 @@ var router = express.Router();
 const querystring = require("querystring");	// cnpm install querystring --save
 var fs= require('fs');						// cnpm install fs --save
 
-/* GET home page. */
+// localhost:3000/file
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-// 原生Node.js实现文件上传下载
-let uuid = () => {  //生成uuid方法
+// 生成uuid方法，类似hash码
+let uuid = () => {
     let s = [];
     let hexDigits = "0123456789abcdef";
     for (let i = 0; i < 36; i++) {
@@ -23,25 +23,28 @@ let uuid = () => {  //生成uuid方法
     return uuid;
 }
 
-router.post('/file', (req, res, next) => {  //post请求  我这边用的是express router 
+// localhost:3000/file/upload 原生Node.js实现文件上传下载
+router.post('/upload', (req, res, next) => {  //post请求  我这边用的是express router 	
     req.setEncoding('binary');
     let body = '';   // 文件数据
     // 边界字符串
-    let boundary = req.headers['content-type'].split('; ')[1].replace('boundary=', '');
+	let boundary = req.headers['content-type'].split('; ')[1].replace('boundary=', '');	
 
     //接收post如data 流 buffer
     req.on('data', function (d) {
         body += d;
     });
 
-    req.on('end', function () {
-        let file = querystring.parse(body, '\r\n', ':');
-        let fileInfo = file['Content-Disposition'].split('; ');
+    req.on('end', function () {		
+		let file = querystring.parse(body, '\r\n', ':');
+		console.log(file['Content-Disposition']);		
+		let fileInfo = file['Content-Disposition'];
         let fileName = '';
         let ext = '';
         for (let value in fileInfo) {
             if (fileInfo[value].indexOf("filename=") != -1) {
-                fileName = fileInfo[value].substring(10, fileInfo[value].length - 1);
+				// fileName = fileInfo[value].substring(10, fileInfo[value].length - 1);
+				fileName = fileInfo[value].substring(25, fileInfo[value].length - 1);
 
                 if (fileName.indexOf('\\') != -1) {
                     fileName = fileName.substring(fileName.lastIndexOf('\\') + 1);
@@ -57,7 +60,7 @@ router.post('/file', (req, res, next) => {  //post请求  我这边用的是expr
          // 上传文件重命名
         let uuidFileName = `${uuid()}.${ext}` 
         //上传文件 本地存放地址
-        let uploadDirFile = `./${uuidFileName}` 
+        let uploadDirFile = `./uploadFiles/${uuidFileName}` 
 
         //创建文件流
         let writerStream = fs.createWriteStream(uploadDirFile);
@@ -66,15 +69,16 @@ router.post('/file', (req, res, next) => {  //post请求  我这边用的是expr
 
         res.set('Access-Control-Allow-Origin',"*");
         
-
         //开始 —— 写入文件到本地
         writerStream.write(binaryDataAlmost.substring(0, binaryDataAlmost.indexOf(`--${boundary}--`)), 'binary'); 
         //写入完成
         writerStream.end();
         writerStream.on('finish', function () {
-            console.log("写入完成。");
-            //删除刚刚创建好的本地文件 -> 只有在把文件存起来的时候需要删除掉本地，否则不要用。
-            fs.unlinkSync(uploadDirFile) 
+			console.log("写入完成。");
+			
+            // 删除刚刚创建好的本地文件 -> 只有在把文件存起来的时候需要删除掉本地，否则不要用。
+			// fs.unlinkSync(uploadDirFile);
+			 
             res.send({ data: data, code: 0, msg: 'ok' })
         });
     });
