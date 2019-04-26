@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper">
         <section>
-            <label for="" class="title">名 称</label><span class="value">：{{appName}}</span>
+            <label for="" class="title" @click="download">名 称</label><span class="value">：{{appName}}</span>
         </section>
         <section>
             <label for="" class="title">类 型</label><span class="value">：{{appType}}</span>
@@ -15,6 +15,8 @@
     </div>
 </template>
 <script>
+import axios from 'axios';
+import qs from 'qs';
 export default {
     name:"AppItem",
     props:['app'],
@@ -32,7 +34,27 @@ export default {
             this.appType = this.app.appType;
             this.author = this.app.author;
             this.createDate = this.app.createDate;
-        }
+		},
+		download(){
+			axios.post('http://localhost:3000/file/download', qs.stringify({
+					appId: '1'
+				}), {
+					responseType: 'blob'
+				})
+				.then(res => {
+					console.log(res);
+					var blob = new Blob([res.data], {'Content-Type': 'aplication/octet-stream;charset=utf-8;'});
+					var elink = document.createElement('a');
+					elink.href = window.URL.createObjectURL(blob);
+					elink.style.display = 'none';
+					// elink.setAttribute('download', 'test.txt');
+					elink.setAttribute('download', 'first.zip');
+					elink.click();
+				})
+				.catch(err => {
+					console.log(err)
+				})
+		}
     },
     mounted(){
         this.init();

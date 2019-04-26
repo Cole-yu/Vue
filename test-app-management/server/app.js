@@ -1,6 +1,7 @@
 var express = require('express');
 var path = require('path');
 var Mock = require('mockjs');
+var fs = require('fs');
 
 //form表单需要的中间件。
 var mutipart = require('connect-multiparty');
@@ -97,6 +98,31 @@ app.post('/upload', mutipartMiddeware, function (req, res) {
     
     //给浏览器返回一个成功提示。
     res.send('upload success!');
+});
+
+app.post('/file/download', function(req, res, next){
+
+	// var filePath = path.join(__dirname, '/uploadFiles/test.txt');
+	var filePath = path.join(__dirname, '/uploadFiles/first.zip');
+
+	var	stats = fs.statSync(filePath);
+	console.log(stats);
+	if(stats.size){
+		res.set({
+			'Access-Control-Allow-Origin':"*",
+			"Content-type":"application/octet-stream",
+			// "Content-Disposition":"attachment;filename=test.txt",
+			// "Content-Disposition":"attachment;filename=first.zip",
+			'Content-Length': stats.size
+		});
+
+		let fReadStream = fs.createReadStream(filePath);
+		fReadStream.pipe(res);
+	}else{		
+		// 发送404响应:
+		res.writeHead(404);
+		res.end('404 Not Found');
+	}	
 });
 
 app.listen(3000);
