@@ -2,21 +2,146 @@
 <html>
 <head>
 	<title>Vue源码学习</title>
-	<script type="text/javascript" src="vue.js"></script>
+	<script type="text/javascript" src="vue.backup.js"></script>
 	<meta charset="utf-8">
 	<meta name="keywords" content="Vue源码学习，通过打断点，逐行运行，了解vue运行过程">
+	<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline';">
 </head>
 <body>
 	<div id="app"></div>
 	<script type="text/javascript">
+		console.log('https://blog.csdn.net/m0_37566921/article/details/131071195?csdn_share_tail=%7B%22type%22%3A%22blog%22%2C%22rType%22%3A%22article%22%2C%22rId%22%3A%22131071195%22%2C%22source%22%3A%22m0_37566921%22%7D')
+		// viewModel
 		var vm = new Vue({
+			data: function(){
+				return {
+					name: 'yfx',
+					sex: 'man',
+				}
+			},
+			props: {
+				age: {
+					require: true,
+					default: 18,
+				}
+			},
+			methods:{
+				getName(){
+					console.log(this.name);
+				},
+				// getAge: null,
+			},
 			el:"#app",
-			template:"<h1>hello world!</h1>",
+			// el: document.body,
+			template:"<h1>hello world! {{name}} </h1>",
 			// render(createElement){
 			// 	return createElement("h1","title");
 			// }
+			watch: {
+				// name(val){
+				// 	console.log(666);
+				// },
+			},
+			mounted(){				
+				// this.getName();
+
+				this.$watch(function(){
+					return this.name + this.age;
+				}, {					
+					handler: function(newVal, oldVal){
+						console.log(newVal + '6666');
+					},
+					immediate: true,
+					deep: true,
+				}, {
+					
+				});
+
+				setTimeout(()=>{
+					this.name = "刘德华";
+					this.age = 20;
+				}, 1000);
+			}
 		});
-		console.log(vm.$options.render);
+		// console.log(vm.$options.render);
+
+		// <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline';">
+		let str = `{ "id": 10393, name: 'zhangxinxu', 'date': '2022-04-30' }`;
+		function c1(){
+			return new Function('return ' + str);
+		}
+		// function d(){
+		// 	return `{ "id": 10393, name: 'zhangxinxu', 'date': '2022-04-30' }`;
+		// }
+		let d = c1();
+		let e = d();
+		// console.log('d', d);
+		// console.log('e', e);
+		// console.log('JSON.parse', JSON.stringify(e));
+
+
+		// var add = new Function("n", "m", "return n + m"); // 前面N个参数是函数的参数，最后一个参数是函数体
+		// function add(n, m){
+		// 	return n + m;
+		// }
+		
+		String.prototype.interpolate = function (params) {
+			// console.log('this---', this);
+			const names = Object.keys(params); // ['code', 'data']
+			const vals = Object.values(params); // [0, [...]]
+			return new Function(...names, `return \`${this}\`;`)(...vals);
+		};
+
+		// let data = {
+		// 	msg: 'success',
+		// 	name: '小红',
+		// 	age: '18',
+		// }
+		// let strTemplate = "${`<div id='app'><span>姓名：${name}</span><span>年龄：${age}</span></div>`}";
+		// let innerHtml = strTemplate.interpolate(data);
+
+		let res = {
+			code: 0,
+			data: [
+				{
+					comment: 7,
+					id: "0001",
+					time: "2020年10月20日",
+					title: "如何让文字作为CSS背景图片显示？"
+				},
+				{
+					comment: 3,
+					id: "0002",
+					time: "2020年10月17日",
+					title: "SVG feTurbulence滤镜深入介绍"
+				}
+			],
+			msg: 'success',
+			name: '小红',
+			age: '18',
+		};
+		let strTemplate = "${data.map(function (obj, index) { return `<tr><td><input type='checkbox' value='${obj.id}'></td><td><div class='ell'>${obj.title}</div></td><td>${obj.time}</td><td align='right'>${obj.comment}</td></tr>`;}).join('')}";
+		let innerHtml = strTemplate.interpolate(res);
+
+		// console.log('innerHtml', innerHtml);
+
+		
+		// let tt = function(code, data){
+		// 	return data.map(function (obj, index) {
+		// 		return `<tr>
+		// 			<td><input type="checkbox" value="${obj.id}"></td>
+		// 			<td><div class="ell">${obj.title}</div></td>
+		// 			<td>${obj.time}</td>
+		// 			<td align="right">${obj.comment}</td>
+		// 		</tr>`;
+		// 	}).join('')
+		// };
+		// let hhhh = tt(0, res.data);
+		// console.log('hhhh', hhhh);
+
+		
+
+
 		// 输出
 		// ƒ anonymous(
 		// ) {
