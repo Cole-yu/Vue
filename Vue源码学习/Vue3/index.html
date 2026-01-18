@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ES模块构建版本</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link type="text/css" rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <!-- 使用全局构建版本 -->
+    <!-- <script src="./vue3.global.js"></script>
+    <script>
+        const { createApp, ref, reactive, computed } = window.Vue
+        createApp({
+            setup() {
+                const msg = ref('Hello vue!')
+                const msgMore = computed(() => msg.value + ' world');
+                return {
+                    message,
+                    msgMore
+                }
+            }
+        }).mount('#app')
+    </script> -->
+
+    <!-- ES模块构建版本 -->
+    <script type="importmap">
+        {
+            "imports": {
+                "vue": "./vue.esm-browser.js"
+            }
+        }
+    </script>
+    <script type="module" src="./main.js"></script>
+</body>
+
+</html>
