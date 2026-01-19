@@ -1,4 +1,4 @@
-import { ref, reactive, computed } from 'vue';
+import { ref, reactive, computed, watch, watchEffect } from 'vue';
 // import MvInput from './components/mv-input/mv-input.js';
 // import MvCount from './components/mv-count/mv-count.js';
 
@@ -32,11 +32,31 @@ export default {
       currentTotal.value = newCount;
     };
 
+    const showCountFlag = ref(true);
+
+    const countFlagChange = () => {
+      showCountFlag.value = !showCountFlag.value;
+    }
+
+    const countDisplayValue = ref(null);
+    watch(showCountFlag, () => {
+      countDisplayValue.value = showCountFlag.value ? "展示" : "隐藏";
+    }, {
+      immediate: true,
+    });
+    // const unwatch = watchEffect(() => {
+    //   countDisplayValue.value = showCountFlag.value ? "展示" : "隐藏";
+    // });
+    // unwatch();
+
     return {
       msg,
       msgMore,
       currentTotal,
       handleCountChange,
+      showCountFlag,
+      countFlagChange,
+      countDisplayValue,
     }
   },
   template: `
@@ -44,8 +64,10 @@ export default {
         <div v-cloak>test demo {{msg}}</div>
         <div v-cloak>test demo {{msgMore}}</div>        
         <MvInput></MvInput>
-        <div v-cloak>【mv-count currentTotal】：&nbsp;&nbsp;{{currentTotal}}</div>
-        <MvCount :initialCount="0" @count-change="handleCountChange"></MvCount>
+        <div v-cloak>MvCount组件的currentTotal值：&nbsp;{{currentTotal}}</div>
+        <MvCount :initialCount="0" @count-change="handleCountChange" v-if="showCountFlag"></MvCount>
+        <button @click="countFlagChange">切换Count组件状态</button>
+        <p>当前Count组件的显示状态：&nbsp;{{countDisplayValue}}</p>
     </div>
   `
 }

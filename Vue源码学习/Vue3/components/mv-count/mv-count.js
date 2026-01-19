@@ -1,4 +1,12 @@
-import { ref, } from 'vue';
+import {
+  ref,
+  onBeforeMount,
+  onMounted,
+  onBeforeUpdate,
+  onUpdated,
+  onBeforeUnmount,
+  onUnmounted,
+} from 'vue';
 
 export default {
   // 声明接收的 Props（父组件传递的初始值）
@@ -27,11 +35,38 @@ export default {
       emit("count-change", count.value);
     };
 
+    // 挂载阶段
+    onBeforeMount(() => {
+      console.log("onBeforeMount：即将挂载 DOM");
+    });
+
+    onMounted(() => {
+      console.log("onMounted：DOM 挂载完成，可操作 DOM");
+    });
+
+    // 更新阶段
+    onBeforeUpdate(() => {
+      console.log("onBeforeUpdate：数据变化，即将更新 DOM");
+    });
+
+    onUpdated(() => {
+      console.log("onUpdated：DOM 已更新完成");
+    });
+
+    // 卸载阶段
+    onBeforeUnmount(() => {
+      console.log("onBeforeUnmount：组件即将卸载");
+    });
+
+    onUnmounted(() => {
+      console.log("onUnmounted：组件已完全卸载，清理资源");
+    });
+
     // 返回需要在模板中使用的状态和方法
     return {
       count,
       increment,
-      decrement
+      decrement,
     };
   },
   // 组件模板
