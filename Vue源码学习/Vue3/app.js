@@ -1,12 +1,20 @@
-import { ref, reactive, computed, watch, watchEffect } from 'vue';
+import { ref, reactive, computed, watch, watchEffect, defineAsyncComponent } from 'vue';
 // import MvInput from './components/mv-input/mv-input.js';
 // import MvCount from './components/mv-count/mv-count.js';
 
 export default {
-  // components: {
+  components: {
   //   MvInput,
-  //   MvCount,
-  // },
+    // MvCount,
+    // MvCount: defineAsyncComponent(() => import("./components/mv-count/mv-count.js")), // defineAsyncComponent定义异步组件
+    MvCount: defineAsyncComponent({
+      loader: () => import("./components/mv-count/mv-count.js"),
+      // loadingComponent: LoadingComponent, // 加载中组件
+      delay: 200, // 展示加载组件(LoadingComponent)前的延迟时间，默认为 200ms
+      timeout: 3000, // 超时显示配置的报错组件，默认值是：Infinity
+      // errorComponent: ErrorComponent, // 加载失败后展示的组件
+    }),
+  },
   setup() {
     const msg = ref('Hello');
     const msgMore = computed(() => msg.value + ' world');

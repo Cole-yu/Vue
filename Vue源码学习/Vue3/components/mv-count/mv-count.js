@@ -17,8 +17,9 @@ export default {
       default: 0
     }
   },
+  emits: ["count-change"],
   // 组件内部状态管理（Vue3 组合式 API - setup）
-  setup(props, { emit }) {
+  setup(props, { emit, attrs, expose, slots }) {
     const count = ref(props.initialCount);
 
     // 增加计数的方法

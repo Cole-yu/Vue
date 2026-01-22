@@ -6,7 +6,6 @@ import App from './app.js';
 const app = createApp(App);
 
 // 注册全局组件
-app.component("MvInput", MvInput);
-app.component("MvCount", MvCount);
-
-app.mount("#app");
+app.component("MvInput", MvInput)
+    // .component("MvCount", MvCount) // 链式调用
+    .mount("#app");
