@@ -9,6 +9,7 @@
 </template>
 
 <script setup>
+// 组合式单文件组件
 import { ref, watch } from "vue";
 
 const question = ref("");

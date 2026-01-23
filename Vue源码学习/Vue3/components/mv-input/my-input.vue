@@ -9,6 +9,7 @@
 </template>
 
 <script>
+// 选项式单文件组件
 export default {
   name: "MyInput",
   data() {

@@ -1,5 +1,6 @@
 import { ref, watch, onWatcherCleanup } from 'vue';
 
+// 没有使用 <script setup> 的组件中
 export default {
   setup() {
     const question = ref("");
